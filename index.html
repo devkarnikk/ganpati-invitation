@@ -1,98 +1,111 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ganpati Invitation</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Ganpati Invitation | Karnik Family</title>
+
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <main class="invitation">
+  <main class="invitation-page">
 
-    <!-- Opening Section -->
-    <section class="hero">
-      <div class="hero-content">
-        <p class="om-symbol">ॐ</p>
-        <p class="eyebrow">॥ श्री गणेशाय नमः ॥</p>
+    <section class="invitation-card">
 
-        <h1>Ganpati Bappa Morya</h1>
+      <button
+        class="music-button"
+        id="musicButton"
+        type="button"
+        aria-label="Toggle background music"
+      >
+        ♪ Music
+      </button>
 
-        <p class="hero-subtitle">
-          With the blessings of Lord Ganesha,
-          we invite you to celebrate with us.
+      <div class="content-wrapper">
+
+        <div class="top-decoration">
+          <span></span>
+          <div class="om-symbol">ॐ</div>
+          <span></span>
+        </div>
+
+        <p class="eyebrow">
+          With the blessings of Lord Ganesha
         </p>
 
-        <button id="enterButton" class="primary-button">
-          Enter Invitation
-        </button>
+        <h1>
+          Ganpati Bappa<br />
+          Morya!
+        </h1>
+
+        <p class="invitation-message">
+          You and your family are warmly invited to seek the blessings
+          of Lord Ganesha and celebrate this auspicious occasion with us.
+        </p>
+
+        <div class="event-details">
+          <p class="date">14 &amp; 15 September 2026</p>
+          <p class="family-name">Karnik Family</p>
+        </div>
+
+        <div class="address">
+          <span class="address-label">Venue</span>
+
+          <p>
+            802, Parag CHS, Chandavarkar Road,<br />
+            Borivali West, Mumbai – 400092
+          </p>
+        </div>
+
+        <div class="action-buttons">
+
+          <a
+            class="action-button primary-button"
+            href="https://www.google.com/maps/search/?api=1&query=802%20Parag%20CHS%20Chandavarkar%20Road%20Borivali%20West%20Mumbai%20400092"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>⌖</span>
+            Get Directions
+          </a>
+
+          <button
+            class="action-button secondary-button"
+            id="calendarButton"
+            type="button"
+          >
+            <span>＋</span>
+            Add to Calendar
+          </button>
+
+        </div>
+
+        <p class="closing-message">
+          Do come. Bappa is waiting.
+        </p>
+
+        <div class="bottom-decoration">
+          <span></span>
+          <span class="small-om">ॐ</span>
+          <span></span>
+        </div>
+
       </div>
-    </section>
-
-    <!-- Invitation Section -->
-    <section id="invitationSection" class="content-section">
-
-      <p class="eyebrow">A warm invitation</p>
-
-      <h2>Come, celebrate with us</h2>
-
-      <p class="invitation-message">
-        We warmly invite you and your family to join us
-        for Ganpati Darshan and Aarti.
-        Your presence will make this celebration even more special.
-      </p>
-
-      <!-- Event Details -->
-      <div class="details-card">
-
-        <div class="detail">
-          <span class="detail-label">Date</span>
-          <span class="detail-value">26 August 2026</span>
-        </div>
-
-        <div class="detail">
-          <span class="detail-label">Darshan & Aarti</span>
-          <span class="detail-value">7:00 PM onwards</span>
-        </div>
-
-        <div class="detail">
-          <span class="detail-label">Invited by</span>
-          <span class="detail-value">Your Family Name</span>
-        </div>
-
-        <div class="detail">
-          <span class="detail-label">Venue</span>
-          <span class="detail-value">
-            Your Address, Mumbai
-          </span>
-        </div>
-
-      </div>
-
-      <!-- Actions -->
-      <div class="actions">
-        <a
-          href="https://maps.google.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="secondary-button"
-        >
-          Get Directions
-        </a>
-
-        <button id="calendarButton" class="primary-button">
-          Add to Calendar
-        </button>
-      </div>
-
-      <p class="footer-message">
-        गणपती बाप्पा मोरया 🙏
-      </p>
 
     </section>
 
   </main>
+
+  <audio id="backgroundMusic" loop>
+    <!-- Add your music file here when ready:
+    <source src="ganpati-music.mp3" type="audio/mpeg" />
+    -->
+  </audio>
 
   <script src="script.js"></script>
 </body>

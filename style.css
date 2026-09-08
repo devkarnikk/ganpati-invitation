@@ -1,20 +1,17 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap");
 
 :root {
-  --background: #fff8ef;
-  --surface: #fffdf9;
-  --text: #4a2418;
-  --muted: #8a6556;
-  --accent: #b85c38;
-  --accent-dark: #8f3f25;
-  --border: #ead8c8;
+  --ivory: #f8f1e7;
+  --maroon: #701f2a;
+  --maroon-dark: #4c121c;
+  --gold: #b58a4b;
+  --text: #432b2b;
+  --muted-text: #806a62;
+  --white: #fffaf1;
 }
 
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 html {
@@ -22,204 +19,444 @@ html {
 }
 
 body {
-  background: var(--background);
+  margin: 0;
+  min-width: 320px;
+  background: var(--ivory);
   color: var(--text);
   font-family: "Montserrat", sans-serif;
 }
 
-.invitation {
-  min-height: 100vh;
+button,
+a {
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* ---------- Hero ---------- */
-
-.hero {
+.invitation-page {
   min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 12px;
+}
+
+/*
+  The uploaded background image is used here.
+  Keep ganpati-background.jpg in the same folder as index.html.
+*/
+.invitation-card {
+  position: relative;
+  width: min(100%, 560px);
+  min-height: 790px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 70px 48px 42px;
+  overflow: hidden;
+  text-align: center;
+
+  background:
+    linear-gradient(
+      rgba(255, 250, 241, 0.16),
+      rgba(255, 250, 241, 0.16)
+    ),
+    url("ganpati-background.jpg") center center / cover no-repeat;
+
+  border: 1px solid rgba(112, 31, 42, 0.28);
+  box-shadow:
+    0 18px 45px rgba(74, 35, 28, 0.14),
+    inset 0 0 0 6px rgba(255, 250, 241, 0.2);
+}
+
+/*
+  A soft ivory layer keeps the text readable without hiding
+  the floral background.
+*/
+.invitation-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 250, 241, 0.24);
+  pointer-events: none;
+}
+
+.content-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  padding: 24px 22px 20px;
+  background: rgba(255, 250, 241, 0.78);
+  border: 1px solid rgba(112, 31, 42, 0.18);
+  box-shadow: 0 8px 25px rgba(74, 35, 28, 0.08);
+}
+
+/* Small decorative corner lines */
+
+.content-wrapper::before,
+.content-wrapper::after {
+  content: "";
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  border: 1px solid rgba(181, 138, 75, 0.7);
+  pointer-events: none;
+}
+
+.content-wrapper::before {
+  top: 10px;
+  left: 10px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.content-wrapper::after {
+  right: 10px;
+  bottom: 10px;
+  border-left: 0;
+  border-top: 0;
+}
+
+.music-button {
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  z-index: 2;
+
+  border: 1px solid rgba(112, 31, 42, 0.35);
+  border-radius: 50px;
+  padding: 8px 12px;
+
+  background: rgba(255, 250, 241, 0.86);
+  color: var(--maroon);
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.music-button:hover,
+.music-button:focus-visible,
+.music-button.is-playing {
+  background: var(--maroon);
+  color: var(--white);
+  outline: none;
+}
+
+.top-decoration,
+.bottom-decoration {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  padding: 32px 20px;
-  background:
-    radial-gradient(circle at 50% 35%, #fff1d8 0%, transparent 45%),
-    var(--background);
+  gap: 12px;
+  width: 100%;
 }
 
-.hero-content {
-  max-width: 650px;
+.top-decoration {
+  margin-bottom: 12px;
+}
+
+.top-decoration span,
+.bottom-decoration span {
+  width: 48px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.8;
 }
 
 .om-symbol {
-  font-size: 72px;
-  margin-bottom: 20px;
-  color: var(--accent);
+  color: var(--maroon);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 34px;
+  line-height: 1;
 }
 
 .eyebrow {
-  font-size: 11px;
-  letter-spacing: 3px;
+  margin: 0 0 8px;
+  color: var(--muted-text);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1.5;
   text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 20px;
-}
-
-h1,
-h2 {
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 600;
 }
 
 h1 {
-  font-size: clamp(48px, 9vw, 88px);
-  line-height: 0.95;
-  margin-bottom: 24px;
-}
-
-h2 {
-  font-size: clamp(38px, 7vw, 58px);
-  line-height: 1;
-  margin-bottom: 24px;
-}
-
-.hero-subtitle,
-.invitation-message {
+  margin: 0;
+  color: var(--maroon);
   font-family: "Cormorant Garamond", serif;
-  font-size: 22px;
-  line-height: 1.5;
-  color: var(--muted);
+  font-size: clamp(50px, 12vw, 70px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.84;
 }
 
-/* ---------- Buttons ---------- */
+.invitation-message {
+  max-width: 360px;
+  margin: 17px auto 20px;
+  color: var(--text);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+}
 
-.primary-button,
-.secondary-button {
+.event-details {
+  margin-bottom: 15px;
+}
+
+.date {
+  margin: 0;
+  color: var(--maroon);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  line-height: 1.5;
+}
+
+.family-name {
+  margin: 5px 0 0;
+  color: var(--gold);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 27px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.address {
+  margin-bottom: 18px;
+}
+
+.address-label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--gold);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.address p {
+  margin: 0;
+  color: var(--muted-text);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.action-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+  width: 100%;
+  margin-bottom: 17px;
+}
+
+.action-button {
+  min-height: 41px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
-  padding: 14px 24px;
-  border-radius: 999px;
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 600;
+  gap: 6px;
+
+  border-radius: 4px;
+  padding: 10px 8px;
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   text-decoration: none;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.action-button span {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.action-button:hover,
+.action-button:focus-visible {
+  transform: translateY(-2px);
+  outline: none;
 }
 
 .primary-button {
-  border: none;
-  background: var(--accent);
-  color: white;
-}
-
-.secondary-button {
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--text);
+  background: var(--maroon);
+  color: var(--white);
+  border: 1px solid var(--maroon);
 }
 
 .primary-button:hover,
-.secondary-button:hover {
-  transform: translateY(-2px);
+.primary-button:focus-visible {
+  background: var(--maroon-dark);
 }
 
-.primary-button:hover {
-  background: var(--accent-dark);
+.secondary-button {
+  background: rgba(255, 250, 241, 0.55);
+  color: var(--maroon);
+  border: 1px solid var(--maroon);
 }
 
-/* ---------- Content ---------- */
-
-.content-section {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 100px 24px;
-  text-align: center;
+.secondary-button:hover,
+.secondary-button:focus-visible {
+  background: var(--maroon);
+  color: var(--white);
 }
 
-.invitation-message {
-  max-width: 560px;
-  margin: 0 auto 48px;
-}
-
-.details-card {
-  max-width: 520px;
-  margin: 0 auto 40px;
-  padding: 8px 24px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  text-align: left;
-}
-
-.detail {
-  display: flex;
-  justify-content: space-between;
-  gap: 24px;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.detail:last-child {
-  border-bottom: none;
-}
-
-.detail-label {
-  font-size: 11px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.detail-value {
-  font-size: 14px;
-  font-weight: 600;
-  text-align: right;
-}
-
-.actions {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.footer-message {
-  margin-top: 80px;
+.closing-message {
+  margin: 0 0 16px;
+  color: var(--maroon);
   font-family: "Cormorant Garamond", serif;
-  font-size: 28px;
-  color: var(--accent);
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 600;
 }
 
-/* ---------- Mobile ---------- */
+.small-om {
+  color: var(--gold);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 20px;
+  line-height: 1;
+}
 
-@media (max-width: 600px) {
-  .hero {
-    min-height: 100svh;
+.bottom-decoration {
+  gap: 10px;
+}
+
+.bottom-decoration span:not(.small-om) {
+  width: 34px;
+}
+
+/* Tablet and smaller laptop screens */
+
+@media (max-height: 850px) and (min-width: 521px) {
+  .invitation-page {
+    align-items: flex-start;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .invitation-card {
+    min-height: 760px;
+    padding-top: 62px;
+    padding-bottom: 34px;
+  }
+
+  .content-wrapper {
+    padding-top: 20px;
+    padding-bottom: 17px;
+  }
+
+  .invitation-message {
+    margin-top: 14px;
+    margin-bottom: 16px;
+  }
+
+  .event-details {
+    margin-bottom: 12px;
+  }
+
+  .address {
+    margin-bottom: 15px;
+  }
+
+  .action-buttons {
+    margin-bottom: 14px;
+  }
+}
+
+/* Mobile layout */
+
+@media (max-width: 520px) {
+  .invitation-page {
+    align-items: flex-start;
+    padding: 10px 8px;
+  }
+
+  .invitation-card {
+    min-height: 0;
+    padding: 62px 18px 30px;
+  }
+
+  .content-wrapper {
+    padding: 22px 17px 18px;
+  }
+
+  .music-button {
+    top: 17px;
+    right: 16px;
+  }
+
+  .top-decoration {
+    margin-bottom: 10px;
   }
 
   .om-symbol {
-    font-size: 58px;
+    font-size: 31px;
   }
 
-  .content-section {
-    padding: 80px 20px;
+  h1 {
+    font-size: 55px;
   }
 
-  .details-card {
-    padding: 8px 20px;
+  .invitation-message {
+    margin-top: 15px;
+    margin-bottom: 17px;
+    font-size: 19px;
   }
 
-  .detail {
-    flex-direction: column;
-    gap: 8px;
+  .date {
+    font-size: 12px;
   }
 
-  .detail-value {
-    text-align: left;
+  .family-name {
+    font-size: 25px;
   }
 
-  .actions > * {
-    width: 100%;
+  .address p {
+    font-size: 10px;
+  }
+
+  .action-button {
+    font-size: 9px;
+  }
+}
+
+/* Very small phones */
+
+@media (max-width: 380px) {
+  .invitation-card {
+    padding: 58px 12px 25px;
+  }
+
+  .content-wrapper {
+    padding: 20px 14px 17px;
+  }
+
+  h1 {
+    font-size: 50px;
+  }
+
+  .invitation-message {
+    font-size: 18px;
+  }
+
+  .action-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .action-button {
+    min-height: 39px;
+    font-size: 10px;
+  }
+
+  .closing-message {
+    font-size: 18px;
   }
 }
