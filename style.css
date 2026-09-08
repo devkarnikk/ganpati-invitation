@@ -1,10 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@500;600;700;800&display=swap");
 
 :root {
   --ivory: #f8f1e7;
+  --ivory-light: #fffaf2;
   --maroon: #701f2a;
   --maroon-dark: #4c121c;
   --gold: #b58a4b;
+  --gold-light: #d8b77b;
   --text: #432b2b;
   --muted-text: #806a62;
   --white: #fffaf1;
@@ -36,24 +38,22 @@ a {
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   padding: 18px 12px;
 }
 
-/*
-  The uploaded background image is used here.
-  Keep ganpati-background.jpg in the same folder as index.html.
-*/
+/* Main invitation background */
+
 .invitation-card {
   position: relative;
-  width: min(100%, 560px);
-  min-height: 790px;
+  width: min(100%, 570px);
+  min-height: 810px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 70px 48px 42px;
   overflow: hidden;
+  padding: 70px 42px 42px;
   text-align: center;
 
   background:
@@ -63,44 +63,70 @@ a {
     ),
     url("ganpati-background.jpg") center center / cover no-repeat;
 
-  border: 1px solid rgba(112, 31, 42, 0.28);
+  border: 1px solid rgba(112, 31, 42, 0.3);
+
   box-shadow:
-    0 18px 45px rgba(74, 35, 28, 0.14),
-    inset 0 0 0 6px rgba(255, 250, 241, 0.2);
+    0 20px 55px rgba(74, 35, 28, 0.16),
+    inset 0 0 0 6px rgba(255, 250, 241, 0.24);
 }
 
-/*
-  A soft ivory layer keeps the text readable without hiding
-  the floral background.
-*/
+/* Soft layer over the background */
+
 .invitation-card::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255, 250, 241, 0.24);
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255, 250, 241, 0.4),
+      rgba(255, 250, 241, 0.16) 70%
+    );
   pointer-events: none;
 }
 
-.content-wrapper {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 420px;
-  padding: 24px 22px 20px;
-  background: rgba(255, 250, 241, 0.78);
-  border: 1px solid rgba(112, 31, 42, 0.18);
-  box-shadow: 0 8px 25px rgba(74, 35, 28, 0.08);
+/* Decorative inner border */
+
+.invitation-card::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgba(112, 31, 42, 0.3);
+  pointer-events: none;
 }
 
-/* Small decorative corner lines */
+/* Main translucent content panel */
+
+.content-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 430px;
+  padding: 24px 25px 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 250, 241, 0.9),
+      rgba(255, 250, 241, 0.72)
+    );
+
+  border: 1px solid rgba(181, 138, 75, 0.45);
+
+  box-shadow:
+    0 10px 35px rgba(74, 35, 28, 0.12),
+    inset 0 0 25px rgba(255, 255, 255, 0.28);
+
+  animation: contentAppear 1s ease both;
+}
 
 .content-wrapper::before,
 .content-wrapper::after {
   content: "";
   position: absolute;
-  width: 55px;
-  height: 55px;
-  border: 1px solid rgba(181, 138, 75, 0.7);
+  width: 58px;
+  height: 58px;
+  border: 1px solid rgba(181, 138, 75, 0.75);
   pointer-events: none;
 }
 
@@ -118,22 +144,25 @@ a {
   border-top: 0;
 }
 
+/* Music button */
+
 .music-button {
   position: absolute;
-  top: 20px;
-  right: 22px;
-  z-index: 2;
+  top: 24px;
+  right: 28px;
+  z-index: 4;
 
   border: 1px solid rgba(112, 31, 42, 0.35);
   border-radius: 50px;
-  padding: 8px 12px;
+  padding: 8px 13px;
 
-  background: rgba(255, 250, 241, 0.86);
+  background: rgba(255, 250, 241, 0.88);
   color: var(--maroon);
+
   font-size: 10px;
   font-weight: 700;
   cursor: pointer;
-  transition: 0.2s ease;
+  transition: 0.25s ease;
 }
 
 .music-button:hover,
@@ -141,8 +170,49 @@ a {
 .music-button.is-playing {
   background: var(--maroon);
   color: var(--white);
-  outline: none;
+  box-shadow: 0 4px 12px rgba(112, 31, 42, 0.2);
 }
+
+/* Floating decorative symbols */
+
+.floating-petal {
+  position: absolute;
+  z-index: 1;
+  color: rgba(112, 31, 42, 0.45);
+  font-family: "Cormorant Garamond", serif;
+  pointer-events: none;
+  animation: floatPetal 5s ease-in-out infinite;
+}
+
+.petal-one {
+  top: 18%;
+  left: 9%;
+  font-size: 23px;
+  animation-delay: 0s;
+}
+
+.petal-two {
+  top: 34%;
+  right: 8%;
+  font-size: 27px;
+  animation-delay: 1.2s;
+}
+
+.petal-three {
+  bottom: 23%;
+  left: 8%;
+  font-size: 19px;
+  animation-delay: 2s;
+}
+
+.petal-four {
+  bottom: 12%;
+  right: 11%;
+  font-size: 24px;
+  animation-delay: 0.7s;
+}
+
+/* Decorations */
 
 .top-decoration,
 .bottom-decoration {
@@ -162,13 +232,13 @@ a {
   width: 48px;
   height: 1px;
   background: var(--gold);
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 .om-symbol {
   color: var(--maroon);
   font-family: "Cormorant Garamond", serif;
-  font-size: 34px;
+  font-size: 35px;
   line-height: 1;
 }
 
@@ -177,7 +247,7 @@ a {
   color: var(--muted-text);
   font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.15em;
   line-height: 1.5;
   text-transform: uppercase;
 }
@@ -186,21 +256,76 @@ h1 {
   margin: 0;
   color: var(--maroon);
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(50px, 12vw, 70px);
+  font-size: clamp(52px, 12vw, 73px);
   font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 0.84;
+  letter-spacing: -0.045em;
+  line-height: 0.82;
 }
 
+h1 span {
+  color: var(--gold);
+}
+
+/* Invitation message */
+
 .invitation-message {
-  max-width: 360px;
-  margin: 17px auto 20px;
+  max-width: 365px;
+  margin: 18px auto 9px;
   color: var(--text);
   font-family: "Cormorant Garamond", serif;
   font-size: 20px;
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.22;
 }
+
+/* Ganpati image */
+
+.ganpati-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 205px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin: 0 auto 5px;
+}
+
+.image-glow {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  width: 210px;
+  height: 180px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+
+  background: radial-gradient(
+    ellipse,
+    rgba(181, 138, 75, 0.28),
+    rgba(181, 138, 75, 0.05) 65%,
+    transparent 75%
+  );
+
+  filter: blur(8px);
+}
+
+.ganpati-image {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: 220px;
+  object-fit: contain;
+  object-position: center bottom;
+  filter:
+    drop-shadow(0 9px 7px rgba(74, 35, 28, 0.16))
+    drop-shadow(0 0 12px rgba(181, 138, 75, 0.18));
+
+  animation: imageAppear 1.2s ease 0.2s both;
+}
+
+/* Event details */
 
 .event-details {
   margin-bottom: 15px;
@@ -211,7 +336,7 @@ h1 {
   color: var(--maroon);
   font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.08em;
   line-height: 1.5;
 }
 
@@ -219,10 +344,12 @@ h1 {
   margin: 5px 0 0;
   color: var(--gold);
   font-family: "Cormorant Garamond", serif;
-  font-size: 27px;
+  font-size: 28px;
   font-weight: 700;
   line-height: 1;
 }
+
+/* Address */
 
 .address {
   margin-bottom: 18px;
@@ -246,6 +373,8 @@ h1 {
   line-height: 1.55;
 }
 
+/* Buttons */
+
 .action-buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -254,25 +383,34 @@ h1 {
   margin-bottom: 17px;
 }
 
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}
+
 .action-button {
-  min-height: 41px;
+  min-height: 42px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-
+  width: 220px;
+  margin: 0 auto;
   border-radius: 4px;
   padding: 10px 8px;
-
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.02em;
   text-decoration: none;
   cursor: pointer;
   transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    transform 0.2s ease;
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .action-button span {
@@ -282,7 +420,7 @@ h1 {
 
 .action-button:hover,
 .action-button:focus-visible {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   outline: none;
 }
 
@@ -290,15 +428,17 @@ h1 {
   background: var(--maroon);
   color: var(--white);
   border: 1px solid var(--maroon);
+  box-shadow: 0 5px 12px rgba(112, 31, 42, 0.16);
 }
 
 .primary-button:hover,
 .primary-button:focus-visible {
   background: var(--maroon-dark);
+  box-shadow: 0 7px 16px rgba(112, 31, 42, 0.23);
 }
 
 .secondary-button {
-  background: rgba(255, 250, 241, 0.55);
+  background: rgba(255, 250, 241, 0.6);
   color: var(--maroon);
   border: 1px solid var(--maroon);
 }
@@ -309,19 +449,24 @@ h1 {
   color: var(--white);
 }
 
+/* Closing message */
+
 .closing-message {
   margin: 0 0 16px;
   color: var(--maroon);
-  font-family: "Cormorant Garamond", serif;
-  font-size: 20px;
-  font-style: italic;
-  font-weight: 600;
+  font-family: "Noto Serif Devanagari", "Nirmala UI", serif;
+  font-size: 23px;
+  font-weight: 800;
+  font-style: normal;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  text-shadow: 0 1px 0 rgba(181, 138, 75, 0.25);
 }
 
 .small-om {
   color: var(--gold);
   font-family: "Cormorant Garamond", serif;
-  font-size: 20px;
+  font-size: 21px;
   line-height: 1;
 }
 
@@ -333,45 +478,44 @@ h1 {
   width: 34px;
 }
 
-/* Tablet and smaller laptop screens */
+/* Animations */
 
-@media (max-height: 850px) and (min-width: 521px) {
-  .invitation-page {
-    align-items: flex-start;
-    padding-top: 12px;
-    padding-bottom: 12px;
+@keyframes contentAppear {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
   }
 
-  .invitation-card {
-    min-height: 760px;
-    padding-top: 62px;
-    padding-bottom: 34px;
-  }
-
-  .content-wrapper {
-    padding-top: 20px;
-    padding-bottom: 17px;
-  }
-
-  .invitation-message {
-    margin-top: 14px;
-    margin-bottom: 16px;
-  }
-
-  .event-details {
-    margin-bottom: 12px;
-  }
-
-  .address {
-    margin-bottom: 15px;
-  }
-
-  .action-buttons {
-    margin-bottom: 14px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* Mobile layout */
+@keyframes imageAppear {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes floatPetal {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(8deg);
+  }
+}
+
+/* Mobile */
 
 @media (max-width: 520px) {
   .invitation-page {
@@ -381,7 +525,11 @@ h1 {
 
   .invitation-card {
     min-height: 0;
-    padding: 62px 18px 30px;
+    padding: 62px 17px 30px;
+  }
+
+  .invitation-card::after {
+    inset: 9px;
   }
 
   .content-wrapper {
@@ -393,22 +541,17 @@ h1 {
     right: 16px;
   }
 
-  .top-decoration {
-    margin-bottom: 10px;
-  }
-
-  .om-symbol {
-    font-size: 31px;
-  }
-
-  h1 {
-    font-size: 55px;
-  }
-
   .invitation-message {
-    margin-top: 15px;
-    margin-bottom: 17px;
+    margin-top: 16px;
     font-size: 19px;
+  }
+
+  .ganpati-image-wrapper {
+    height: 185px;
+  }
+
+  .ganpati-image {
+    height: 200px;
   }
 
   .date {
@@ -416,15 +559,11 @@ h1 {
   }
 
   .family-name {
-    font-size: 25px;
+    font-size: 26px;
   }
 
-  .address p {
-    font-size: 10px;
-  }
-
-  .action-button {
-    font-size: 9px;
+  .floating-petal {
+    opacity: 0.6;
   }
 }
 
@@ -440,11 +579,19 @@ h1 {
   }
 
   h1 {
-    font-size: 50px;
+    font-size: 51px;
   }
 
   .invitation-message {
     font-size: 18px;
+  }
+
+  .ganpati-image-wrapper {
+    height: 170px;
+  }
+
+  .ganpati-image {
+    height: 185px;
   }
 
   .action-buttons {
@@ -452,11 +599,23 @@ h1 {
   }
 
   .action-button {
-    min-height: 39px;
+    min-height: 40px;
     font-size: 10px;
   }
 
   .closing-message {
-    font-size: 18px;
+    font-size: 17px;
+  }
+}
+
+/* Respect users who prefer reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
   }
 }

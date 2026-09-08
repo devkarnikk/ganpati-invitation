@@ -1,56 +1,67 @@
-const EVENT_YEAR = 2026;
-const EVENT_START_DATE = "20260914";
-const EVENT_END_DATE = "20260916";
-
-const calendarButton = document.getElementById("calendarButton");
 const musicButton = document.getElementById("musicButton");
 const backgroundMusic = document.getElementById("backgroundMusic");
 
 let isMusicPlaying = false;
 
-calendarButton.addEventListener("click", () => {
-  const eventTitle = "Ganpati Darshan - Karnik Family";
-  const eventDetails =
-    "You are warmly invited to seek the blessings of Lord Ganesha with the Karnik Family.";
+function updateMusicButton() {
+  if (!musicButton) return;
 
-  const eventLocation =
-    "802, Parag CHS, Chandavarkar Road, Borivali West, Mumbai - 400092";
-
-  const calendarUrl =
-    "https://calendar.google.com/calendar/render?action=TEMPLATE" +
-    `&text=${encodeURIComponent(eventTitle)}` +
-    `&dates=${EVENT_START_DATE}/${EVENT_END_DATE}` +
-    `&details=${encodeURIComponent(eventDetails)}` +
-    `&location=${encodeURIComponent(eventLocation)}`;
-
-  window.open(calendarUrl, "_blank", "noopener,noreferrer");
-});
-
-musicButton.addEventListener("click", async () => {
-  const hasMusicFile = backgroundMusic.querySelector("source");
-
-  if (!hasMusicFile) {
-    musicButton.textContent = "♪ Add Music";
-    setTimeout(() => {
-      musicButton.textContent = "♪ Music";
-    }, 1800);
-
-    return;
+  if (isMusicPlaying) {
+    musicButton.textContent = "♪ Mute";
+    musicButton.classList.add("is-playing");
+    musicButton.setAttribute("aria-label", "Mute music");
+  } else {
+    musicButton.textContent = "♪ Play";
+    musicButton.classList.remove("is-playing");
+    musicButton.setAttribute("aria-label", "Play music");
   }
+}
+
+async function startMusic() {
+  if (!backgroundMusic) return;
 
   try {
-    if (isMusicPlaying) {
-      backgroundMusic.pause();
-      musicButton.textContent = "♪ Music";
-      musicButton.classList.remove("is-playing");
-      isMusicPlaying = false;
-    } else {
-      await backgroundMusic.play();
-      musicButton.textContent = "♫ Playing";
-      musicButton.classList.add("is-playing");
-      isMusicPlaying = true;
-    }
+    await backgroundMusic.play();
+
+    isMusicPlaying = true;
+    updateMusicButton();
   } catch (error) {
-    musicButton.textContent = "♪ Music";
+    console.log("Music could not start automatically:", error);
+
+    isMusicPlaying = false;
+    updateMusicButton();
   }
-});
+}
+
+function stopMusic() {
+  if (!backgroundMusic) return;
+
+  backgroundMusic.pause();
+  backgroundMusic.currentTime = 0;
+
+  isMusicPlaying = false;
+  updateMusicButton();
+}
+
+if (musicButton && backgroundMusic) {
+  musicButton.addEventListener("click", async () => {
+    if (isMusicPlaying) {
+      stopMusic();
+    } else {
+      await startMusic();
+    }
+  });
+
+  backgroundMusic.addEventListener("ended", () => {
+    if (isMusicPlaying) {
+      backgroundMusic.currentTime = 0;
+      backgroundMusic.play();
+    }
+  });
+
+  updateMusicButton();
+
+  // Browsers may block autoplay.
+  // If blocked, tap the "♪ Play" button.
+  startMusic();
+}

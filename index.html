@@ -17,13 +17,18 @@
 
     <section class="invitation-card">
 
+      <div class="floating-petal petal-one">✦</div>
+      <div class="floating-petal petal-two">✧</div>
+      <div class="floating-petal petal-three">❋</div>
+      <div class="floating-petal petal-four">✦</div>
+
       <button
         class="music-button"
         id="musicButton"
         type="button"
-        aria-label="Toggle background music"
+        aria-label="Play music"
       >
-        ♪ Music
+        ♪ Play
       </button>
 
       <div class="content-wrapper">
@@ -40,13 +45,23 @@
 
         <h1>
           Ganpati Bappa<br />
-          Morya!
+          <span>Morya!</span>
         </h1>
 
         <p class="invitation-message">
-          You and your family are warmly invited to seek the blessings
-          of Lord Ganesha and celebrate this auspicious occasion with us.
+          With hearts full of devotion and joy, we invite you and your
+          family to celebrate the arrival of our beloved Bappa.
         </p>
+
+        <div class="ganpati-image-wrapper">
+          <div class="image-glow"></div>
+
+          <img
+            src="gannu-bappa.png"
+            alt="Lord Ganesha seated on a pink lotus"
+            class="ganpati-image"
+          />
+        </div>
 
         <div class="event-details">
           <p class="date">14 &amp; 15 September 2026</p>
@@ -54,7 +69,7 @@
         </div>
 
         <div class="address">
-          <span class="address-label">Venue</span>
+          <span class="address-label">At Our Residence</span>
 
           <p>
             802, Parag CHS, Chandavarkar Road,<br />
@@ -66,27 +81,19 @@
 
           <a
             class="action-button primary-button"
-            href="https://www.google.com/maps/search/?api=1&query=802%20Parag%20CHS%20Chandavarkar%20Road%20Borivali%20West%20Mumbai%20400092"
+            href="https://maps.app.goo.gl/wJK7pYxnqNPiMYiV8"
             target="_blank"
             rel="noopener noreferrer"
           >
             <span>⌖</span>
             Get Directions
           </a>
-
-          <button
-            class="action-button secondary-button"
-            id="calendarButton"
-            type="button"
-          >
-            <span>＋</span>
-            Add to Calendar
-          </button>
+          
 
         </div>
 
         <p class="closing-message">
-          Do come. Bappa is waiting.
+          ॥ श्री गणेशाय नमः ॥
         </p>
 
         <div class="bottom-decoration">
@@ -102,9 +109,7 @@
   </main>
 
   <audio id="backgroundMusic" loop>
-    <!-- Add your music file here when ready:
-    <source src="ganpati-music.mp3" type="audio/mpeg" />
-    -->
+    <source src="bappa-audio.mp3" type="audio/mpeg" />
   </audio>
 
   <script src="script.js"></script>
